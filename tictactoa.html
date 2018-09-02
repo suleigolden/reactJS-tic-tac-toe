@@ -77,17 +77,21 @@
 				</div>
 			)
 		},
+
+		getEl: function(el){
+				return document.getElementById(el);
+		},
 		//Player Next Move
 		nextMove:  function(btn){
-				document.getElementById(btn).style.backgroundColor = '#337ab7';
-				document.getElementById(btn).innerHTML = 'P';
+				this.getEl(btn).style.backgroundColor = '#337ab7';
+				this.getEl(btn).innerHTML = 'P';
 
 				playerCompleteMove += 1;
 				check_If_Win();
-				computerNextMove();
+				computerNextMove(btn);
 		},
 		//Computer Next Move
-		computerNextMove: function(){
+		computerNextMove: function(playerMove){
 
 		},
 		//Check if player or computer win the game after every move
