@@ -36,6 +36,9 @@
 <script type="text/babel">
 	var TicTactToa = React.createClass({
 		render: function(){
+			var playerCompleteMove = 0; 
+			var computerCompleteMove = 0;
+			var whoToMove = "";
 			return(
 				<div>
 					<div className="col-md-10">
@@ -74,9 +77,22 @@
 				</div>
 			)
 		},
+		//Player Next Move
 		nextMove:  function(btn){
 				document.getElementById(btn).style.backgroundColor = '#337ab7';
 				document.getElementById(btn).innerHTML = 'P';
+
+				playerCompleteMove += 1;
+				check_If_Win();
+				computerNextMove();
+		},
+		//Computer Next Move
+		computerNextMove: function(){
+
+		},
+		//Check if player or computer win the game after every move
+		check_If_Win: function(){
+
 		}
 	});
 
