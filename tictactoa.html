@@ -77,26 +77,317 @@
 				</div>
 			)
 		},
-
+		//short the document.getElementById to something ssimple like getEl
 		getEl: function(el){
 				return document.getElementById(el);
 		},
+		//Return the Text of a button
+		getText: function(el){
+			var btn_text =  document.getElementById(el).innerHTML; 
+		    return btn_text;
+		},
 		//Player Next Move
 		nextMove:  function(btn){
+			if(this.getText(btn) == ""){
 				this.getEl(btn).style.backgroundColor = '#337ab7';
 				this.getEl(btn).innerHTML = 'P';
 
-				playerCompleteMove += 1;
-				check_If_Win();
-				computerNextMove(btn);
+				//playerCompleteMove += 1;
+				// check_If_Win();
+				 this.computerNextMove(btn);
+			}else{ }
+				
+		},
+		//Set the move of computer
+		setComputerMove: function(btn){
+			this.getEl(btn).style.backgroundColor = '#d9534f';
+		    this.getEl(btn).innerHTML = 'C';
 		},
 		//Computer Next Move
-		computerNextMove: function(playerMove){
+		computerNextMove: function(btn){
 
+
+		    switch(btn){
+                   case "btnClick1":
+                       if(this.getText('btnClick1') == "P" && this.getText('btnClick2') == "P" && this.getText('btnClick3') == ""){
+                            this.setComputerMove('btnClick3');
+                        }else if(this.getText('btnClick1') == "P" && this.getText('btnClick3') == "P" && this.getText('btnClick2') == ""){
+                            this.setComputerMove('btnClick2');
+                        }else if(this.getText('btnClick1') == "P" && this.getText('btnClick4') == "P" && this.getText('btnClick7') == ""){
+                            this.setComputerMove('btnClick7');
+                        }else if(this.getText('btnClick1') == "P" && this.getText('btnClick7') == "P" && this.getText('btnClick4') == ""){
+                            this.setComputerMove('btnClick4');
+                        }else if(this.getText('btnClick1') == "P" && this.getText('btnClick5') == "P" && this.getText('btnClick9') == ""){
+                            this.setComputerMove('btnClick9');
+                        }else if(this.getText('btnClick1') == "P" && this.getText('btnClick9') == "P" && this.getText('btnClick5') == ""){
+                            this.setComputerMove('btnClick5');
+                        }else{
+                            this.computerPlayerNextMove(btn);
+                        }
+                       break;
+                        case "btnClick2":
+                       if(this.getText('btnClick1') == "P" && this.getText('btnClick2') == "P" && this.getText('btnClick3') == ""){
+                            this.setComputerMove('btnClick3');
+                        }else if(this.getText('btnClick2') == "P" && this.getText('btnClick3') == "P" && this.getText('btnClick1') == ""){
+                            this.setComputerMove('btnClick1');
+                        }else if(this.getText('btnClick2') == "P" && this.getText('btnClick5') == "P" && this.getText('btnClick8') == ""){
+                            this.setComputerMove('btnClick8');
+                        }else if(this.getText('btnClick2') == "P" && this.getText('btnClick8') == "P" && this.getText('btnClick5') == ""){
+                            this.setComputerMove('btnClick5');
+                        }else{
+                              this.computerPlayerNextMove(btn);
+                        }
+                       break;
+                   case "btnClick3":
+                       if(this.getText('btnClick3') == "P" && this.getText('btnClick2') == "P" && this.getText('btnClick1') == ""){
+                            this.setComputerMove('btnClick1');
+                        }else if(this.getText('btnClick3') == "P"  && this.getText('btnClick1') == "P"  && this.getText('btnClick2') == ""){
+                            this.setComputerMove('btnClick2');
+                        }else if(this.getText('btnClick3') == "P"  && this.getText('btnClick5') == "P"  && this.getText('btnClick7') == ""){
+                            this.setComputerMove('btnClick7');
+                        }else if(this.getText('btnClick3') == "P"  && this.getText('btnClick6') == "P"  && this.getText('btnClick9') == ""){
+                            this.setComputerMove('btnClick9');
+                        }else if(this.getText('btnClick3') == "P"  && this.getText('btnClick9') == "P"  && this.getText('btnClick6') == ""){
+                            this.setComputerMove('btnClick6');
+                        }else if(this.getText('btnClick3') == "P"  && this.getText('btnClick7') == "P"  && this.getText('btnClick5') == ""){
+                            this.setComputerMove('btnClick5');
+                        }else{
+                             this.computerPlayerNextMove(btn);
+                        }
+                       break;
+                   case "btnClick4":
+                       if(this.getText('btnClick4') == "P" && this.getText('btnClick1') == "P" && this.getText('btnClick7') == ""){
+                            this.setComputerMove('btnClick7');
+                        }else if(this.getText('btnClick4') == "P" && this.getText('btnClick7') == "P" && this.getText('btnClick1') == ""){
+                            this.setComputerMove('btnClick1');
+                        }else if(this.getText('btnClick4') == "P" && this.getText('btnClick5') == "P" && this.getText('btnClick6') == ""){
+                            this.setComputerMove('btnClick6');
+                        }else if(this.getText('btnClick4') == "P" && this.getText('btnClick6') == "P" && this.getText('btnClick5') == ""){
+                            this.setComputerMove('btnClick5');
+                        }else if(this.getText('btnClick8') == "P" && this.getText('btnClick5') == "P" && this.getText('btnClick2') == ""){
+                            this.setComputerMove('btnClick2');
+                        }else{
+                             this.computerPlayerNextMove(btn);
+                        }
+                       break;
+                   case "btnClick5":
+                       if(this.getText('btnClick5') == "P" && this.getText('btnClick1') == "P" && this.getText('btnClick9') == ""){
+                            this.setComputerMove('btnClick9');
+                        }else if(this.getText('btnClick5') == "P" && this.getText('btnClick2') == "P" && this.getText('btnClick8') == ""){
+                            this.setComputerMove('btnClick8');
+                        }else if(this.getText('btnClick5') == "P" && this.getText('btnClick3') == "P" && this.getText('btnClick7') == ""){
+                            this.setComputerMove('btnClick7');
+                        }else if(this.getText('btnClick5') == "P" && this.getText('btnClick6') == "P" && this.getText('btnClick4') == ""){
+                            this.setComputerMove('btnClick4');
+                        }else if(this.getText('btnClick5') == "P" && this.getText('btnClick9') == "P" && this.getText('btnClick1') == ""){
+                            this.setComputerMove('btnClick1');
+                        }else if(this.getText('btnClick5') == "P" && this.getText('btnClick8') == "P" && this.getText('btnClick2') == ""){
+                            this.setComputerMove('btnClick2');
+                        }else if(this.getText('btnClick5') == "P" && this.getText('btnClick7') == "P" && this.getText('btnClick3') == ""){
+                            this.setComputerMove('btnClick3');
+                        }else if(this.getText('btnClick5') == "P" && this.getText('btnClick4') == "P" && this.getText('btnClick6') == ""){
+                            this.setComputerMove('btnClick6');
+                        }else{
+                             this.computerPlayerNextMove(btn);
+                        }
+                       break;
+                   case "btnClick6":
+                       if(this.getText('btnClick6') == "P" && this.getText('btnClick3') == "P" && this.getText('btnClick9') == ""){
+                            this.setComputerMove('btnClick9');
+                        }else if(this.getText('btnClick6') == "P" && this.getText('btnClick9') == "P" && this.getText('btnClick3') == ""){
+                            this.setComputerMove('btnClick3');
+                        }else if(this.getText('btnClick6') == "P" && this.getText('btnClick5') == "P" && this.getText('btnClick4') == ""){
+                            this.setComputerMove('btnClick4');
+                        }else if(this.getText('btnClick6') == "P" && this.getText('btnClick4') == "P" && this.getText('btnClick5') == ""){
+                            this.setComputerMove('btnClick5');
+                        }else{
+                             this.computerPlayerNextMove(btn);
+                        }
+                       break;
+                   case "btnClick7":
+                       if(this.getText('btnClick7') == "P" && this.getText('btnClick4') == "P" && this.getText('btnClick1') == ""){
+                            this.setComputerMove('btnClick1');
+                        }else if(this.getText('btnClick7') == "P" && this.getText('btnClick1') == "P" && this.getText('btnClick4') == ""){
+                            this.setComputerMove('btnClick4');
+                        }else if(this.getText('btnClick7') == "P" && this.getText('btnClick8') == "P" && this.getText('btnClick9') == ""){
+                            this.setComputerMove('btnClick9');
+                        }else if(this.getText('btnClick7') == "P" && this.getText('btnClick9') == "P" && this.getText('btnClick8') == ""){
+                            this.setComputerMove('btnClick8');
+                        }else if(this.getText('btnClick7') == "P" && this.getText('btnClick5') == "P" && this.getText('btnClick3') == ""){
+                            this.setComputerMove('btnClick3');
+                        }if(this.getText('btnClick7') == "P" && this.getText('btnClick3') == "P" && this.getText('btnClick5') == ""){
+                            this.setComputerMove('btnClick5');
+                        }else{
+                             this.computerPlayerNextMove(btn);
+                        }
+                       break;
+                   case "btnClick8":
+                       if(this.getText('btnClick8') == "P" && this.getText('btnClick7') == "P" && this.getText('btnClick9') == ""){
+                            this.setComputerMove('btnClick9');
+                        }else if(this.getText('btnClick8') == "P" && this.getText('btnClick9') == "P" && this.getText('btnClick7') == ""){
+                            this.setComputerMove('btnClick7');
+                        }else if(this.getText('btnClick8') == "P" && this.getText('btnClick5') == "P" && this.getText('btnClick2') == ""){
+                            this.setComputerMove('btnClick2');
+                        }else if(this.getText('btnClick8') == "P" && this.getText('btnClick2') == "P" && this.getText('btnClick5') == ""){
+                            this.setComputerMove('btnClick5');
+                        }else{
+                             this.computerPlayerNextMove(btn);
+                        }
+                       break;
+                   case "btnClick9":
+                       if(this.getText('btnClick9') == "P" && this.getText('btnClick6') == "P" && this.getText('btnClick3') == ""){
+                            this.setComputerMove('btnClick3');
+                        }else if(this.getText('btnClick9') == "P" && this.getText('btnClick3') == "P" && this.getText('btnClick6') == ""){
+                            this.setComputerMove('btnClick6');
+                        }else if(this.getText('btnClick9') == "P" && this.getText('btnClick8') == "P" && this.getText('btnClick7') == ""){
+                            this.setComputerMove('btnClick7');
+                        }else if(this.getText('btnClick9') == "P" && this.getText('btnClick7') == "P" && this.getText('btnClick8') == ""){
+                            this.setComputerMove('btnClick8');
+                        }else if(this.getText('btnClick9') == "P" && this.getText('btnClick5') == "P" && this.getText('btnClick1') == ""){
+                            this.setComputerMove('btnClick1');
+                        }else if(this.getText('btnClick9') == "P" && this.getText('btnClick1') == "P" && this.getText('btnClick5') == ""){
+                            this.setComputerMove('btnClick5');
+                        }else{
+                             this.computerPlayerNextMove(btn);
+                        }
+                       break;
+
+                   }
+
+
+		},
+		//Computer player play next move
+		computerPlayerNextMove: function(btn){
+			 switch(btn){
+                   case "btnClick1":
+                        if(this.getText('btnClick6') == ""){
+                            this.setComputerMove('btnClick6');
+                        }else if(this.getText('btnClick2') == ""){
+                            this.setComputerMove('btnClick2');
+                        }else if(this.getText('btnClick4') == ""){
+                            this.setComputerMove('btnClick4');
+                        }else if(this.getText('btnClick7') == ""){
+                            this.setComputerMove('btnClick7');
+                        }else if(this.getText('btnClick5') == ""){
+                            this.setComputerMove('btnClick5');
+                        }else if(this.getText('btnClick9') == ""){
+                            this.setComputerMove('btnClick9');
+                        }
+                    break;
+                     case "btnClick2":
+                            if(this.getText('btnClick1') == ""){
+                               this.setComputerMove('btnClick1');
+                           }else if(this.getText('btnClick3') == ""){
+                               this.setComputerMove('btnClick3');
+                           }else if(this.getText('btnClick5') == ""){
+                               this.setComputerMove('btnClick5');
+                           }else if(this.getText('btnClick8') == ""){
+                               this.setComputerMove('btnClick8');
+                           }
+                         break;
+                     case "btnClick3":
+                            if(this.getText('btnClick4') == ""){
+                                this.setComputerMove('btnClick4');
+                             }else  if(this.getText('btnClick2') == ""){
+                                this.setComputerMove('btnClick2');
+                            }else  if(this.getText('btnClick5') == ""){
+                                this.setComputerMove('btnClick5');
+                            }else  if(this.getText('btnClick7') == ""){
+                                this.setComputerMove('btnClick7');
+                            }else if(this.getText('btnClick6') == ""){
+                              this.setComputerMove('btnClick6');
+                            }else if(this.getText('btnClick9') == ""){
+                              this.setComputerMove('btnClick9');
+                            }
+                         break;
+                     case "btnClick4":
+                            if(this.getText('btnClick1') == ""){
+                              this.setComputerMove('btnClick1');
+                            }else if(this.getText('btnClick7') == ""){
+                              this.setComputerMove('btnClick7');
+                            }else if(this.getText('btnClick5') == ""){
+                              this.setComputerMove('btnClick5');
+                            }else if(this.getText('btnClick6') == ""){
+                              this.setComputerMove('btnClick6');
+                            }
+                         break;
+                     case "btnClick5":
+                            if(this.getText('btnClick1') == ""){
+                              this.setComputerMove('btnClick1');
+                            }else if(this.getText('btnClick2') == ""){
+                              this.setComputerMove('btnClick2');
+                            }else  if(this.getText('btnClick3') == ""){
+                              this.setComputerMove('btnClick3');
+                            }else  if(this.getText('btnClick4') == ""){
+                              this.setComputerMove('btnClick4');
+                            }else if(this.getText('btnClick6') == ""){
+                              this.setComputerMove('btnClick6');
+                            }else if(this.getText('btnClick7') == ""){
+                              this.setComputerMove('btnClick7');
+                            }else if(this.getText('btnClick8') == ""){
+                              this.setComputerMove('btnClick8');
+                            }else if(this.getText('btnClick9') == ""){
+                              this.setComputerMove('btnClick9');
+                            }
+                         break;
+                     case "btnClick6":
+                            if(this.getText('btnClick3') == ""){
+                              this.setComputerMove('btnClick3');
+                            }else if(this.getText('btnClick4') == ""){
+                              this.setComputerMove('btnClick4');
+                            }else if(this.getText('btnClick5') == ""){
+                              this.setComputerMove('btnClick5');
+                            }else if(this.getText('btnClick9') == ""){
+                              this.setComputerMove('btnClick9');
+                            }
+                         break;
+                     case "btnClick7":
+                            if(this.getText('btnClick6') == ""){
+                              this.setComputerMove('btnClick6');
+                            }else if(this.getText('btnClick4') == ""){
+                              this.setComputerMove('btnClick4');
+                            }else if(this.getText('btnClick5') == ""){
+                              this.setComputerMove('btnClick5');
+                            }else if(this.getText('btnClick3') == ""){
+                              this.setComputerMove('btnClick3');
+                            }else if(this.getText('btnClick8') == ""){
+                              this.setComputerMove('btnClick8');
+                            }else if(this.getText('btnClick9') == ""){
+                              this.setComputerMove('btnClick9');
+                            }
+                         break;
+                     case "btnClick8":
+                            if(this.getText('btnClick7') == ""){
+                              this.setComputerMove('btnClick7');
+                            }else if(this.getText('btnClick2') == ""){
+                              this.setComputerMove('btnClick2');
+                            }else if(this.getText('btnClick5') == ""){
+                              this.setComputerMove('btnClick5');
+                            }else if(this.getText('btnClick9') == ""){
+                              this.setComputerMove('btnClick9');
+                            }
+                         break;
+                     case "btnClick9":
+                            if(this.getText('btnClick4') == ""){
+                              this.setComputerMove('btnClick4');
+                            }else if(this.getText('btnClick5') == ""){
+                              this.setComputerMove('btnClick5');
+                            }else if(this.getText('btnClick3') == ""){
+                              this.setComputerMove('btnClick3');
+                            }else if(this.getText('btnClick6') == ""){
+                              this.setComputerMove('btnClick6');
+                            }else if(this.getText('btnClick7') == ""){
+                              this.setComputerMove('btnClick7');
+                            }else if(this.getText('btnClick8') == ""){
+                              this.setComputerMove('btnClick8');
+                            }
+                         break;
+            }
+            //player_MovePlay += 1;
 		},
 		//Check if player or computer win the game after every move
 		check_If_Win: function(){
-
+			
 		}
 	});
 
