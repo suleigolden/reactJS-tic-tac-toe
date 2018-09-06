@@ -90,6 +90,9 @@
 						<div className="col-md-5">
 							<h3>Player Move: <label id="label_playerMove"></label></h3>
 						</div>
+						<div className="col-md-10">
+							<h1><label id="label_Who_Win"></label></h1>
+						</div>
 					</div>
 				</div>
 			)
@@ -112,7 +115,8 @@
 				this.IncrementPlayerMove();
 				this.getEl('label_playerMove').innerHTML = this.state.playerMoveCount;
 
-				// check_If_Win();***************************
+				//Check if player win
+			    this.check_If_Win();
 				//Computer Next Move
 				 this.computerNextMove(btn);
 				 this.IncrementComputerMove();
@@ -409,7 +413,85 @@
 		},
 		//Check if player or computer win the game after every move
 		check_If_Win: function(){
-			
+			      //Getting the Holizontal move of player move
+			       var H_1 = this.getText('btnClick1');  var H_2 = this.getText('btnClick2');  var H_3 = this.getText('btnClick3');
+			       var H_4 = this.getText('btnClick4');  var H_5 = this.getText('btnClick5');  var H_6 = this.getText('btnClick6');
+			       var H_7 = this.getText('btnClick7');  var H_8 = this.getText('btnClick8');  var H_9 = this.getText('btnClick9');
+			       
+			       //Check the COMPUTER Top, Middle and Bottom Horizontal move to see if there is match in the row.
+			       //Display COMPUTER WINS if all the rows of Top or Middle or Bottom Horizontal are C (matches) 
+			       if(H_1 == "C" && H_2 == "C" && H_3 == "C"){
+			           this.popUpWhowin("C");
+			       }else if(H_4 == "C" && H_5 == "C" && H_6 == "C"){
+			           this.popUpWhowin("C");
+			       }else if(H_7 == "C" && H_8 == "C" && H_9 == "C"){
+			           this.popUpWhowin("C");
+			       }
+			       //Check the PLAYER Top, Middle and Bottom Horizontal move to see if there is match in the row
+			       ////Display PLAYER WINS if all the rows of Top or Middle or Bottom Horizontal are P (matches)
+			       else if(H_1 == "P" && H_2 == "P" && H_3 == "P"){
+			           this.popUpWhowin("P");
+			       }else if(H_4 == "P" && H_5 == "P" && H_6 == "P"){
+			           this.popUpWhowin("P");
+			       }else if(H_7 == "P" && H_8 == "P" && H_9 == "P"){
+			           this.popUpWhowin("P");
+			       }
+			        //Check the COMPUTER Top, Middle and Bottom Vertical move to see if there is match in the row.
+			       //Display COMPUTER WINS if all the rows of Top or Middle or Bottom Horizontal are C (matches) 
+			       else if(H_1 == "C" && H_4 == "C" && H_7 == "C"){
+			           this.popUpWhowin("C");
+			       }else if(H_2 == "C" && H_5 == "C" && H_8 == "C"){
+			           this.popUpWhowin("C");
+			       }else if(H_3 == "C" && H_6 == "C" && H_9 == "C"){
+			           this.popUpWhowin("C");
+			       }
+			        //Check the PLAYER Top, Middle and Bottom Vertical move to see if there is match in the row.
+			       //Display PLAYER WINS if all the rows of Top or Middle or Bottom Horizontal are C (matches) 
+			       else if(H_1 == "P" && H_4 == "P" && H_7 == "P"){
+			           this.popUpWhowin("P");
+			       }else if(H_2 == "P" && H_5 == "P" && H_8 == "P"){
+			           popUpWhowin("P");
+			       }else if(H_3 == "P" && H_6 == "P" && H_9 == "P"){
+			           this.popUpWhowin("P");
+			       }
+			       //Check the COMPUTER Cross (angle 45 degrees) play or move to see if there is match.
+			       //Display COMPUTER WINS if all the three bottons on angle 45 degrees from the Bottom left or right to Top, or
+			       //from the Top left or right to the Buttom are C (matches) 
+			       else if(H_1 == "C" && H_5 == "C" && H_9 == "C"){
+			           this.popUpWhowin("C");
+			       }else if(H_3 == "C" && H_5 == "C" && H_7 == "C"){
+			           this.popUpWhowin("C");
+			       }
+			       //Check the PLAYER Cross (angle 45 degrees) play or move to see if there is match.
+			       //Display PLAYER WINS if all the three bottons on angle 45 degrees from the Bottom left or right to Top, or
+			       //from the Top left or right to the Bottom are C (matches) 
+			       else if(H_1 == "P" && H_5 == "P" && H_9 == "P"){
+			           this.popUpWhowin("P");
+			       }else if(H_3 == "P" && H_5 == "P" && H_7 == "P"){
+			           this.popUpWhowin("P");
+			       }else{
+			           this.checkGameDraw();
+			       }
+
+		},
+		popUpWhowin: function(player){
+			if(player =="P"){
+				this.getEl('label_Who_Win').innerHTML = "PLAYER WINS in "+this.state.playerMoveCount+" Moves";
+				this.resetPlay();
+			}else if(player =="C"){
+				this.getEl('label_Who_Win').innerHTML = "PLAYER WINS in "+this.state.playerMoveCount+" Moves";
+				this.resetPlay();
+			}else{
+
+			}
+		
+            
+		},
+		checkGameDraw:  function(){
+
+		},
+		resetPlay: function(){
+
 		}
 	});
 
