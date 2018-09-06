@@ -20,8 +20,14 @@
     		width: 100%; 
     		min-height: 150px;
     		background-color: #FFF;
-    		border-color: #2e6da4;
+    		border-color: transparent;
     		color:#FFF;
+    	}
+    	#playAgain{
+    		width: 100%; 
+    		min-height: 150px;
+    		font-size:77px;
+    		display:none;
     	}
     </style>
 </head>
@@ -39,7 +45,9 @@
 		getInitialState: function(){
 			return { 
 				playerMoveCount: 1, 
-				computerMoveCount: 1}
+				computerMoveCount: 1,
+				isGameOver: "false"
+			   }
 		},
 		IncrementPlayerMove : function(){
          this.setState({ playerMoveCount: this.state.playerMoveCount + 1 });
@@ -47,9 +55,13 @@
 	   IncrementComputerMove : function(){
          this.setState({ computerMoveCount: this.state.computerMoveCount + 1 });
 	   },
+	   setGameOver : function(){
+         this.setState({ isGameOver: "true" });
+	   },
 		render: function(){
 			return(
 				<div>
+					<div id="mainGamePanel">
 					<div className="col-md-10">
 						<div onClick={this.nextMove.bind(this,'btnClick1')} className="col-md-3" id="button_edit">
 							<button id="btnClick1"></button> 
@@ -83,15 +95,18 @@
 							<button id="btnClick9"></button> 
 						</div>
 					</div>
+					</div>
 					<div className="col-md-10">
+						
 						<div className="col-md-5">
-							<h3>Computer Move: <label id="label_computerMove"></label></h3>
+							<h3>Computer Move: <label id="label_computerMove">0</label></h3>
 						</div>
 						<div className="col-md-5">
-							<h3>Player Move: <label id="label_playerMove"></label></h3>
+							<h3>Player Move: <label id="label_playerMove">0</label></h3>
 						</div>
 						<div className="col-md-10">
 							<h1><label id="label_Who_Win"></label></h1>
+							<h1><button onClick={this.playAgain} className="btn btn-info" id="playAgain">Play Again</button></h1>
 						</div>
 					</div>
 				</div>
@@ -108,7 +123,7 @@
 		},
 		//Player Next Move
 		nextMove:  function(btn){
-			if(this.getText(btn) == ""){
+			if(this.getText(btn) == "" || isGameOver !="false"){
 				this.getEl(btn).style.backgroundColor = '#337ab7';
 				this.getEl(btn).innerHTML = 'P';
 
@@ -480,9 +495,11 @@
 			if(player =="P"){
 				this.getEl('label_Who_Win').innerHTML = "CONGRATULATION...YOU WIN COMPUTER in "+this.state.playerMoveCount+" Moves";
 				this.resetPlay();
+				this.setGameOver();
 			}else if(player =="C"){
 				this.getEl('label_Who_Win').innerHTML = "COMPUTER WINS in "+this.state.playerMoveCount+" Moves";
 				this.resetPlay();
+				this.setGameOver();
 			}else{
 
 			}
@@ -495,12 +512,19 @@
 		    && this.getText('btnClick7') !="" && this.getText('btnClick8') !="" && this.getText('btnClick9') !=""){
 		 	this.getEl('label_Who_Win').innerHTML = "The Game is Draw!";
             this.resetPlay();
+            this.setGameOver();
        }else{
            
        }
 		},
 		resetPlay: function(){
-
+			this.getEl('playAgain').style.display = 'block';//;
+			
+			//this.getEl('mainGamePanel').innerHTML = '';//;
+			 
+		},
+		playAgain: function(){
+			window.location.reload();
 		}
 	});
 
