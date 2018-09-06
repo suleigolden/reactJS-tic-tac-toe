@@ -121,6 +121,8 @@
 				 this.computerNextMove(btn);
 				 this.IncrementComputerMove();
 				 this.getEl('label_computerMove').innerHTML = this.state.computerMoveCount;
+				 //Check if computer win
+			    this.check_If_Win();
 			}else{ }
 				
 		},
@@ -476,10 +478,10 @@
 		},
 		popUpWhowin: function(player){
 			if(player =="P"){
-				this.getEl('label_Who_Win').innerHTML = "PLAYER WINS in "+this.state.playerMoveCount+" Moves";
+				this.getEl('label_Who_Win').innerHTML = "CONGRATULATION...YOU WIN COMPUTER in "+this.state.playerMoveCount+" Moves";
 				this.resetPlay();
 			}else if(player =="C"){
-				this.getEl('label_Who_Win').innerHTML = "PLAYER WINS in "+this.state.playerMoveCount+" Moves";
+				this.getEl('label_Who_Win').innerHTML = "COMPUTER WINS in "+this.state.playerMoveCount+" Moves";
 				this.resetPlay();
 			}else{
 
@@ -488,7 +490,14 @@
             
 		},
 		checkGameDraw:  function(){
-
+		 if(this.getText('btnClick1') !="" && this.getText('btnClick2') !="" && this.getText('btnClick3') !=""
+		    && this.getText('btnClick4') !="" && this.getText('btnClick5') !="" && this.getText('btnClick6') !="" 
+		    && this.getText('btnClick7') !="" && this.getText('btnClick8') !="" && this.getText('btnClick9') !=""){
+		 	this.getEl('label_Who_Win').innerHTML = "The Game is Draw!";
+            this.resetPlay();
+       }else{
+           
+       }
 		},
 		resetPlay: function(){
 
