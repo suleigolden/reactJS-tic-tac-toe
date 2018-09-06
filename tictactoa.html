@@ -35,10 +35,19 @@
 </div>
 <script type="text/babel">
 	var TicTactToa = React.createClass({
+
+		getInitialState: function(){
+			return { 
+				playerMoveCount: 1, 
+				computerMoveCount: 1}
+		},
+		IncrementPlayerMove : function(){
+         this.setState({ playerMoveCount: this.state.playerMoveCount + 1 });
+	   },
+	   IncrementComputerMove : function(){
+         this.setState({ computerMoveCount: this.state.computerMoveCount + 1 });
+	   },
 		render: function(){
-			var playerCompleteMove = 0; 
-			var computerCompleteMove = 0;
-			var whoToMove = "";
 			return(
 				<div>
 					<div className="col-md-10">
@@ -74,6 +83,14 @@
 							<button id="btnClick9"></button> 
 						</div>
 					</div>
+					<div className="col-md-10">
+						<div className="col-md-5">
+							<h3>Computer Move: <label id="label_computerMove"></label></h3>
+						</div>
+						<div className="col-md-5">
+							<h3>Player Move: <label id="label_playerMove"></label></h3>
+						</div>
+					</div>
 				</div>
 			)
 		},
@@ -92,9 +109,14 @@
 				this.getEl(btn).style.backgroundColor = '#337ab7';
 				this.getEl(btn).innerHTML = 'P';
 
-				//playerCompleteMove += 1;
-				// check_If_Win();
+				this.IncrementPlayerMove();
+				this.getEl('label_playerMove').innerHTML = this.state.playerMoveCount;
+
+				// check_If_Win();***************************
+				//Computer Next Move
 				 this.computerNextMove(btn);
+				 this.IncrementComputerMove();
+				 this.getEl('label_computerMove').innerHTML = this.state.computerMoveCount;
 			}else{ }
 				
 		},
@@ -103,7 +125,7 @@
 			this.getEl(btn).style.backgroundColor = '#d9534f';
 		    this.getEl(btn).innerHTML = 'C';
 		},
-		//Computer Next Move
+		//Computer Game play Next Move
 		computerNextMove: function(btn){
 
 
@@ -177,6 +199,8 @@
                             this.setComputerMove('btnClick8');
                         }else if(this.getText('btnClick5') == "P" && this.getText('btnClick3') == "P" && this.getText('btnClick7') == ""){
                             this.setComputerMove('btnClick7');
+                        }else if(this.getText('btnClick5') == "P" && this.getText('btnClick4') == "P" && this.getText('btnClick6') == ""){
+                            this.setComputerMove('btnClick6');
                         }else if(this.getText('btnClick5') == "P" && this.getText('btnClick6') == "P" && this.getText('btnClick4') == ""){
                             this.setComputerMove('btnClick4');
                         }else if(this.getText('btnClick5') == "P" && this.getText('btnClick9') == "P" && this.getText('btnClick1') == ""){
@@ -185,8 +209,6 @@
                             this.setComputerMove('btnClick2');
                         }else if(this.getText('btnClick5') == "P" && this.getText('btnClick7') == "P" && this.getText('btnClick3') == ""){
                             this.setComputerMove('btnClick3');
-                        }else if(this.getText('btnClick5') == "P" && this.getText('btnClick4') == "P" && this.getText('btnClick6') == ""){
-                            this.setComputerMove('btnClick6');
                         }else{
                              this.computerPlayerNextMove(btn);
                         }
@@ -343,7 +365,7 @@
                          break;
                      case "btnClick7":
                             if(this.getText('btnClick6') == ""){
-                              this.setComputerMove('btnClick6');
+                              //this.setComputerMove('btnClick6');
                             }else if(this.getText('btnClick4') == ""){
                               this.setComputerMove('btnClick4');
                             }else if(this.getText('btnClick5') == ""){
