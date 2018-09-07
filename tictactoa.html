@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Tic Tac Toa</title>
-    <link rel="stylesheet" type="text/css" href="bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="morefiles/bootstrap.min.css">
     <script src="js/react.min.js"></script>
     <script src="js/react-dom.min.js"></script>
     <script src="js/browser.min.js"></script>
@@ -119,8 +119,8 @@
 							<h1><label id="label_Who_Win"></label></h1>
 							<h1><button onClick={this.playAgain} className="btn btn-info" id="playAgain">Play Again</button></h1>
 						</div>
-						<img src="loading.gif" id="loadingImg" height="100" width="100" />
-						<img src="loadingplay.gif" id="loadingImgPlay" height="100" width="100" />
+						<img src="morefiles/loading.gif" id="loadingImg" height="100" width="100" />
+						<img src="morefiles/loadingplay.gif" id="loadingImgPlay" height="100" width="100" />
 					</div>
 					</div>
 					<div className="col-md-10" id="panelButtons">
@@ -174,7 +174,7 @@
 		//Player Next Move
 		nextMove:  function(btn){
 			var playerPlay = new Audio(); 
-			playerPlay.src = "playerPlay.mp3"; 
+			playerPlay.src = "morefiles/playerPlay.mp3"; 
 			console.log(this.state.isGameOver);
 			console.log(this.state.iscomputerPlaying);
 			if(this.getText(btn) == "" && this.state.isGameOver !=false && this.state.iscomputerPlaying !=false){
@@ -199,7 +199,7 @@
 		computerToPlay: function(btn){
 				//console.log(btn);
 				 var computerPlay = new Audio();
-				 computerPlay.src = "computerPlay.mp3";
+				 computerPlay.src = "morefiles/computerPlay.mp3";
 			     computerPlay.play();
 				 this.computerNextMove(btn);
 				 this.IncrementComputerMove();
@@ -563,8 +563,8 @@
 		popUpWhowin: function(player){
 			var wrong = new Audio(); 
 			var congrat = new Audio();
-			wrong.src = "Funylaugh.mp3"; 
-			congrat.src = "congrat.mp3";
+			wrong.src = "morefiles/Funylaugh.mp3"; 
+			congrat.src = "morefiles/congrat.mp3";
 			if(player =="P"){
 				this.getEl('label_Who_Win').innerHTML = "CONGRATULATION...YOU WIN COMPUTER in "+this.state.playerMoveCount+" Moves";
 				this.setGameOver();
@@ -589,7 +589,7 @@
             this.resetPlay();
             this.setGameOver();
             var mytone = new Audio();
-			mytone.src = "MyTone.mp3";
+			mytone.src = "morefiles/MyTone.mp3";
 			mytone.play();
        }else{
            
