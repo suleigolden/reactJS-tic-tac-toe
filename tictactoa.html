@@ -55,6 +55,13 @@
     	#titleMessage{
     		text-align:center;
     	}
+    	#loadingImg{
+    		display:none;
+    	}
+    	#loadingImgPlay{
+    		display:none;
+    		float:right;
+    	}
     </style>
 </head>
 <body>
@@ -100,6 +107,21 @@
 					<h1 id="titleMessage">Tic Tac Toe</h1>
 					<p>Tic-tac-toe is a game for two players, P and C, C stand for Computer while P stand for human player. 
 					The player who succeeds in placing three of their marks in a horizontal, vertical, or diagonal row wins the game.</p>
+					<div className="">
+						<div className="col-md-5">
+							<h3>Computer Move: <label id="label_computerMove">0</label></h3>
+						</div>
+						<div className="col-md-5">
+							<h3>Player Move: <label id="label_playerMove">0</label></h3>
+						</div>
+						<div className="col-md-10">
+
+							<h1><label id="label_Who_Win"></label></h1>
+							<h1><button onClick={this.playAgain} className="btn btn-info" id="playAgain">Play Again</button></h1>
+						</div>
+						<img src="loading.gif" id="loadingImg" height="100" width="100" />
+						<img src="loadingplay.gif" id="loadingImgPlay" height="100" width="100" />
+					</div>
 					</div>
 					<div className="col-md-10" id="panelButtons">
 						<div onClick={this.nextMove.bind(this,'btnClick1')} className="col-md-3" id="button_edit">
@@ -135,18 +157,8 @@
 						</div>
 					</div>
 					</div>
-					<div className="col-md-8" id="labelMessage">
-						<div className="col-md-5">
-							<h3>Computer Move: <label id="label_computerMove">0</label></h3>
-						</div>
-						<div className="col-md-5">
-							<h3>Player Move: <label id="label_playerMove">0</label></h3>
-						</div>
-						<div className="col-md-10">
-							<h1><label id="label_Who_Win"></label></h1>
-							<h1><button onClick={this.playAgain} className="btn btn-info" id="playAgain">Play Again</button></h1>
-						</div>
-					</div>
+
+					
 				</div>
 			)
 		},
@@ -176,6 +188,8 @@
 				//Check if player win
 			    this.check_If_Win();
 				//Computer Next Move
+				this.getEl('loadingImg').style.display = 'block';
+				this.getEl('loadingImgPlay').style.display = 'block';
 			    let myVartime;
 				 myVartime = setTimeout(()=> this.computerToPlay(btn), 3000)
 				 
@@ -184,12 +198,14 @@
 		},
 		computerToPlay: function(btn){
 				//console.log(btn);
-				var computerPlay = new Audio();
-				computerPlay.src = "computerPlay.mp3";
+				 var computerPlay = new Audio();
+				 computerPlay.src = "computerPlay.mp3";
 			     computerPlay.play();
 				 this.computerNextMove(btn);
 				 this.IncrementComputerMove();
 				 this.getEl('label_computerMove').innerHTML = this.state.computerMoveCount;
+				 this.getEl('loadingImg').style.display = 'none';
+				 this.getEl('loadingImgPlay').style.display = 'none';
 				 //Check if computer win
 			    this.check_If_Win();
 			    this.setComputerRoundToPlay();
