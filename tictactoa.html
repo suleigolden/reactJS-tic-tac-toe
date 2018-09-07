@@ -79,8 +79,8 @@
 		getInitialState: function(){
 			return { 
 				playerMoveCount: 1, 
-				computerMoveCount: 1,
-				isGameOver: true,
+				computerMoveCount: 0,
+				isGameOver: "GameON",
 				iscomputerPlaying: true
 			   }
 		},
@@ -91,7 +91,8 @@
          this.setState({ computerMoveCount: this.state.computerMoveCount + 1 });
 	   },
 	   setGameOver : function(){
-         this.setState({ isGameOver: false });
+         this.setState({ isGameOver: "GameOff"});
+         console.log('YAAAAAAP');
 	   },
 	   setComputerIsPlaying : function(){
          this.setState({ iscomputerPlaying: false });
@@ -175,9 +176,11 @@
 		nextMove:  function(btn){
 			var playerPlay = new Audio(); 
 			playerPlay.src = "morefiles/playerPlay.mp3"; 
+			// console.log(this.state.isGameOver);
+			// console.log(this.state.iscomputerPlaying);
+			//this.setGameOver();
 			console.log(this.state.isGameOver);
-			console.log(this.state.iscomputerPlaying);
-			if(this.getText(btn) == "" && this.state.isGameOver !=false && this.state.iscomputerPlaying !=false){
+			if(this.getText(btn) == "" && this.state.isGameOver =="GameON" && this.state.iscomputerPlaying !=false){
 				playerPlay.play();
 				this.getEl(btn).style.backgroundColor = '#337ab7';
 				this.getEl(btn).innerHTML = 'P';
@@ -188,16 +191,21 @@
 				//Check if player win
 			    this.check_If_Win();
 				//Computer Next Move
-				this.getEl('loadingImg').style.display = 'block';
-				this.getEl('loadingImgPlay').style.display = 'block';
-			    let myVartime;
-				 myVartime = setTimeout(()=> this.computerToPlay(btn), 3000)
+				console.log("IN: "+this.state.isGameOver);
+				if (this.state.isGameOver != "GameOff") {
+					this.getEl('loadingImg').style.display = 'block';
+					this.getEl('loadingImgPlay').style.display = 'block';
+				    let myVartime;
+					 myVartime = setTimeout(()=> this.computerToPlay(btn), 1000)
+				}
+				
 				 
 			}else{ }
 				
 		},
 		computerToPlay: function(btn){
 				//console.log(btn);
+			if (this.state.isGameOver != "GameOff") {
 				 var computerPlay = new Audio();
 				 computerPlay.src = "morefiles/computerPlay.mp3";
 			     computerPlay.play();
@@ -209,6 +217,7 @@
 				 //Check if computer win
 			    this.check_If_Win();
 			    this.setComputerRoundToPlay();
+			}else{}
 		},
 		//Set the move of computer
 		setComputerMove: function(btn){
@@ -561,41 +570,53 @@
 
 		},
 		popUpWhowin: function(player){
+
+			if (this.state.isGameOver != "GameOff") {
+			//this.setGameOver();
 			var wrong = new Audio(); 
 			var congrat = new Audio();
 			wrong.src = "morefiles/Funylaugh.mp3"; 
 			congrat.src = "morefiles/congrat.mp3";
 			if(player =="P"){
 				this.getEl('label_Who_Win').innerHTML = "CONGRATULATION...YOU WIN COMPUTER in "+this.state.playerMoveCount+" Moves";
-				this.setGameOver();
+				//this.setGameOver();
 				this.resetPlay();
 				congrat.play();
+
+			  this.setGameOver();
 			}else if(player =="C"){
-				this.getEl('label_Who_Win').innerHTML = "COMPUTER WINS in "+this.state.playerMoveCount+" Moves";
-				this.setGameOver();
+				this.getEl('label_Who_Win').innerHTML = "COMPUTER WINS in "+this.state.computerMoveCount+" Moves";
+				
 				this.resetPlay();
 				wrong.play();
+
+				this.setGameOver();
 			}else{
 
 			}
+			
+         }else{ }
 		
             
 		},
 		checkGameDraw:  function(){
-		 if(this.getText('btnClick1') !="" && this.getText('btnClick2') !="" && this.getText('btnClick3') !=""
-		    && this.getText('btnClick4') !="" && this.getText('btnClick5') !="" && this.getText('btnClick6') !="" 
-		    && this.getText('btnClick7') !="" && this.getText('btnClick8') !="" && this.getText('btnClick9') !=""){
-		 	this.getEl('label_Who_Win').innerHTML = "The Game is Draw!";
-            this.resetPlay();
-            this.setGameOver();
-            var mytone = new Audio();
-			mytone.src = "morefiles/MyTone.mp3";
-			mytone.play();
-       }else{
-           
-       }
+			if (this.state.isGameOver != "GameOff") {
+				 if(this.getText('btnClick1') !="" && this.getText('btnClick2') !="" && this.getText('btnClick3') !=""
+				    && this.getText('btnClick4') !="" && this.getText('btnClick5') !="" && this.getText('btnClick6') !="" 
+				    && this.getText('btnClick7') !="" && this.getText('btnClick8') !="" && this.getText('btnClick9') !=""){
+				 	this.getEl('label_Who_Win').innerHTML = "The Game is Draw!";
+		            this.resetPlay();
+		            var mytone = new Audio();
+					mytone.src = "morefiles/MyTone.mp3";
+					mytone.play();
+					this.setGameOver();
+		       }else{
+		           
+		       }
+		   }
 		},
 		resetPlay: function(){
+			//this.setGameOver();
 			this.getEl('playAgain').style.display = 'block';//;
 			//this.getEl('mainGamePanel').innerHTML = '';//;
 			 
