@@ -48,10 +48,9 @@
     		color:#FFF;
     	}
     	#board{
-    		border:1px #000 solid;
     		display: block;
-    margin-left: auto;
-    margin-right: auto;
+		    margin-left: auto;
+		    margin-right: auto;
     	}
     </style>
 </head>
@@ -147,8 +146,13 @@
 		},
 		//Player Next Move
 		nextMove:  function(btn){
-			console.log(this.state.isGameOver);
+			var playerPlay = new Audio(); 
+			var computerPlay = new Audio();
+			playerPlay.src = "playerPlay.mp3"; 
+			computerPlay.src = "computerPlay.mp3";
+			//console.log(this.state.isGameOver);
 			if(this.getText(btn) == "" && this.state.isGameOver){
+				playerPlay.play();
 				this.getEl(btn).style.backgroundColor = '#337ab7';
 				this.getEl(btn).innerHTML = 'P';
 
@@ -158,6 +162,7 @@
 				//Check if player win
 			    this.check_If_Win();
 				//Computer Next Move
+				computerPlay.play();
 				 this.computerNextMove(btn);
 				 this.IncrementComputerMove();
 				 this.getEl('label_computerMove').innerHTML = this.state.computerMoveCount;
@@ -517,14 +522,20 @@
 
 		},
 		popUpWhowin: function(player){
+			var wrong = new Audio(); 
+			var congrat = new Audio();
+			wrong.src = "Funylaugh.mp3"; 
+			congrat.src = "congrat.mp3";
 			if(player =="P"){
 				this.getEl('label_Who_Win').innerHTML = "CONGRATULATION...YOU WIN COMPUTER in "+this.state.playerMoveCount+" Moves";
 				this.setGameOver();
 				this.resetPlay();
+				congrat.play();
 			}else if(player =="C"){
 				this.getEl('label_Who_Win').innerHTML = "COMPUTER WINS in "+this.state.playerMoveCount+" Moves";
 				this.setGameOver();
 				this.resetPlay();
+				wrong.play();
 			}else{
 
 			}
@@ -538,6 +549,9 @@
 		 	this.getEl('label_Who_Win').innerHTML = "The Game is Draw!";
             this.resetPlay();
             this.setGameOver();
+            var mytone = new Audio();
+			mytone.src = "MyTone.mp3";
+			mytone.play();
        }else{
            
        }
