@@ -9,19 +9,28 @@
     <script src="js/react-dom.min.js"></script>
     <script src="js/browser.min.js"></script>
     <style type="text/css">
+    body{
+    	
+    	background-color:rgba(0, 0, 255, 0.3);
+    }
     	#button_edit{
-    		border: 1px #CCC solid;
+    		border: 1px # solid;
     		min-height: 150px;
-    		padding: 1px;
     		text-align: center;
     		font-size: 70px;
+    		background-color:rgba(255,0,0,0.3);
+    
     	}
     	#button_edit>button{
     		width: 100%; 
-    		min-height: 150px;
+    		min-height: 160px;
     		background-color: #FFF;
     		border-color: transparent;
     		color:#FFF;
+    		display: block;
+		    margin: 10px 0;
+		    padding: 10px; 
+		   
     	}
     	#playAgain{
     		width: 100%; 
@@ -29,13 +38,29 @@
     		font-size:77px;
     		display:none;
     	}
+    	#panelButtons{
+    		padding:0px;
+    		margin-top:0px;
+    	}
+    	#labelMessage{
+    		background-color: rgba(0, 0, 0, 0.5);
+    		max-width:712px;
+    		color:#FFF;
+    	}
+    	#board{
+    		border:1px #000 solid;
+    		display: block;
+    margin-left: auto;
+    margin-right: auto;
+    	}
     </style>
 </head>
 <body>
 <div class="container">
 	<div class="row">
 		<div class="col-md-12">
-			<div id="board"></div>
+			<div class="col-md-7"></div>
+			<div class="row" id="board"></div>
 		</div>
 	</div>
 </div>
@@ -62,7 +87,7 @@
 			return(
 				<div>
 					<div id="mainGamePanel">
-					<div className="col-md-10">
+					<div className="col-md-10" id="panelButtons">
 						<div onClick={this.nextMove.bind(this,'btnClick1')} className="col-md-3" id="button_edit">
 							<button id="btnClick1"></button> 
 						</div>
@@ -73,7 +98,7 @@
 							<button id="btnClick3"></button> 
 						</div>
 					</div>
-					<div className="col-md-10">
+					<div className="col-md-10" id="panelButtons">
 						<div onClick={this.nextMove.bind(this,'btnClick4')} className="col-md-3" id="button_edit">
 							<button id="btnClick4"></button> 
 						</div>
@@ -84,7 +109,7 @@
 							<button id="btnClick6"></button> 
 						</div>
 					</div>
-					<div className="col-md-10">
+					<div className="col-md-10" id="panelButtons">
 						<div onClick={this.nextMove.bind(this,'btnClick7')} className="col-md-3" id="button_edit">
 							<button id="btnClick7"></button> 
 						</div>
@@ -96,8 +121,7 @@
 						</div>
 					</div>
 					</div>
-					<div className="col-md-10">
-						
+					<div className="col-md-8" id="labelMessage">
 						<div className="col-md-5">
 							<h3>Computer Move: <label id="label_computerMove">0</label></h3>
 						</div>
