@@ -73,7 +73,8 @@
 			return { 
 				playerMoveCount: 1, 
 				computerMoveCount: 1,
-				isGameOver: true
+				isGameOver: true,
+				iscomputerPlaying: true
 			   }
 		},
 		IncrementPlayerMove : function(){
@@ -84,6 +85,12 @@
 	   },
 	   setGameOver : function(){
          this.setState({ isGameOver: false });
+	   },
+	   setComputerIsPlaying : function(){
+         this.setState({ iscomputerPlaying: false });
+	   },
+	   setComputerRoundToPlay : function(){
+         this.setState({ iscomputerPlaying: true });
 	   },
 		render: function(){
 			return(
@@ -155,29 +162,37 @@
 		//Player Next Move
 		nextMove:  function(btn){
 			var playerPlay = new Audio(); 
-			var computerPlay = new Audio();
 			playerPlay.src = "playerPlay.mp3"; 
-			computerPlay.src = "computerPlay.mp3";
-			//console.log(this.state.isGameOver);
-			if(this.getText(btn) == "" && this.state.isGameOver){
+			console.log(this.state.isGameOver);
+			console.log(this.state.iscomputerPlaying);
+			if(this.getText(btn) == "" && this.state.isGameOver !=false && this.state.iscomputerPlaying !=false){
 				playerPlay.play();
 				this.getEl(btn).style.backgroundColor = '#337ab7';
 				this.getEl(btn).innerHTML = 'P';
 
 				this.IncrementPlayerMove();
 				this.getEl('label_playerMove').innerHTML = this.state.playerMoveCount;
-
+				this.setComputerIsPlaying();
 				//Check if player win
 			    this.check_If_Win();
 				//Computer Next Move
-				computerPlay.play();
+			    let myVartime;
+				 myVartime = setTimeout(()=> this.computerToPlay(btn), 3000)
+				 
+			}else{ }
+				
+		},
+		computerToPlay: function(btn){
+				//console.log(btn);
+				var computerPlay = new Audio();
+				computerPlay.src = "computerPlay.mp3";
+			     computerPlay.play();
 				 this.computerNextMove(btn);
 				 this.IncrementComputerMove();
 				 this.getEl('label_computerMove').innerHTML = this.state.computerMoveCount;
 				 //Check if computer win
 			    this.check_If_Win();
-			}else{ }
-				
+			    this.setComputerRoundToPlay();
 		},
 		//Set the move of computer
 		setComputerMove: function(btn){
