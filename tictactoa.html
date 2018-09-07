@@ -46,7 +46,7 @@
 			return { 
 				playerMoveCount: 1, 
 				computerMoveCount: 1,
-				isGameOver: "false"
+				isGameOver: true
 			   }
 		},
 		IncrementPlayerMove : function(){
@@ -56,7 +56,7 @@
          this.setState({ computerMoveCount: this.state.computerMoveCount + 1 });
 	   },
 	   setGameOver : function(){
-         this.setState({ isGameOver: "true" });
+         this.setState({ isGameOver: false });
 	   },
 		render: function(){
 			return(
@@ -123,7 +123,8 @@
 		},
 		//Player Next Move
 		nextMove:  function(btn){
-			if(this.getText(btn) == "" || isGameOver !="false"){
+			console.log(this.state.isGameOver);
+			if(this.getText(btn) == "" && this.state.isGameOver){
 				this.getEl(btn).style.backgroundColor = '#337ab7';
 				this.getEl(btn).innerHTML = 'P';
 
@@ -494,12 +495,12 @@
 		popUpWhowin: function(player){
 			if(player =="P"){
 				this.getEl('label_Who_Win').innerHTML = "CONGRATULATION...YOU WIN COMPUTER in "+this.state.playerMoveCount+" Moves";
-				this.resetPlay();
 				this.setGameOver();
+				this.resetPlay();
 			}else if(player =="C"){
 				this.getEl('label_Who_Win').innerHTML = "COMPUTER WINS in "+this.state.playerMoveCount+" Moves";
-				this.resetPlay();
 				this.setGameOver();
+				this.resetPlay();
 			}else{
 
 			}
@@ -519,7 +520,6 @@
 		},
 		resetPlay: function(){
 			this.getEl('playAgain').style.display = 'block';//;
-			
 			//this.getEl('mainGamePanel').innerHTML = '';//;
 			 
 		},
