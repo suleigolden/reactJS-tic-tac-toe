@@ -52,6 +52,9 @@
 		    margin-left: auto;
 		    margin-right: auto;
     	}
+    	#titleMessage{
+    		text-align:center;
+    	}
     </style>
 </head>
 <body>
@@ -86,6 +89,11 @@
 			return(
 				<div>
 					<div id="mainGamePanel">
+					<div className="col-md-10" id="labelMessage">
+					<h1 id="titleMessage">Tic Tac Toe</h1>
+					<p>Tic-tac-toe is a game for two players, P and C, C stand for Computer while P stand for human player. 
+					The player who succeeds in placing three of their marks in a horizontal, vertical, or diagonal row wins the game.</p>
+					</div>
 					<div className="col-md-10" id="panelButtons">
 						<div onClick={this.nextMove.bind(this,'btnClick1')} className="col-md-3" id="button_edit">
 							<button id="btnClick1"></button> 
