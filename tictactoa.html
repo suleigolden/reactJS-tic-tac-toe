@@ -63,6 +63,7 @@
     		float:right;
     	}
     </style>
+
 </head>
 <body>
 <div class="container">
@@ -464,7 +465,7 @@
                          break;
                      case "btnClick7":
                             if(this.getText('btnClick6') == ""){
-                              //this.setComputerMove('btnClick6');
+                              this.setComputerMove('btnClick6');
                             }else if(this.getText('btnClick4') == ""){
                               this.setComputerMove('btnClick4');
                             }else if(this.getText('btnClick5') == ""){
@@ -545,7 +546,7 @@
 			       else if(H_1 == "P" && H_4 == "P" && H_7 == "P"){
 			           this.popUpWhowin("P");
 			       }else if(H_2 == "P" && H_5 == "P" && H_8 == "P"){
-			           popUpWhowin("P");
+			           this.popUpWhowin("P");
 			       }else if(H_3 == "P" && H_6 == "P" && H_9 == "P"){
 			           this.popUpWhowin("P");
 			       }
